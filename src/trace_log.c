@@ -1,5 +1,4 @@
 #include "trace_log.h"
-#include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -79,6 +78,27 @@ void trace_log(LOG_level_t level, const char *fmt, ...)
     unlock_logger();
 
     va_end(args);
+}
+
+void trace_vlog(LOG_level_t level, const char *comment, const char *fmt, va_list ap)
+{
+    if(level > LOG_CRITICAL)
+    {
+        level = LOG_CRITICAL;
+    }
+
+    lock_logger();
+    init_logger();
+    if(level >= current_log_level)
+    {
+        fprintf(current_log_file, "[%s] ", trace_level_str[level]);
+        time_prefix();
+        fprintf(current_log_file, "%s ", comment);
+        vfprintf(current_log_file, fmt, ap);
+        fprintf(current_log_file, "\n");
+        fflush(current_log_file);
+    }
+    unlock_logger();    
 }
 
 void trace_log_setlevel(LOG_level_t level)

@@ -10,6 +10,7 @@ extern "C" {
 
 #include <stdio.h>
 #include <stdint.h>
+#include <stdarg.h>
 
 
 #define trace_log_printf(level, format, ...) trace_log(level, "%s:%03d " format, __FILE__, __LINE__, ##__VA_ARGS__)
@@ -33,6 +34,7 @@ typedef enum
 }LOG_level_t;
 
 void trace_log(LOG_level_t level, const char *fmt, ...);
+void trace_vlog(LOG_level_t level, const char *comment, const char *fmt, va_list ap);
 void trace_log_setlevel(LOG_level_t level);
 LOG_level_t trace_log_getlevel(void);
 void trace_log_set_output(FILE *fp);

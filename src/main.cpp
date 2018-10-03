@@ -28,6 +28,12 @@ void sig_handler(int signum)
     terminate = true;
 }
 
+void print_cfg_error(cfg_t *cfg, const char *fmt, va_list ap)
+{
+    (void)cfg;
+    trace_vlog(LOG_WARNING, "libconfuse", fmt, ap);
+}
+
 void change_sate(cfg_t * cfg, bool is_online)
 {
     if(is_online)
@@ -61,6 +67,7 @@ int main()
     };
 
     cfg_t * cfg = cfg_init(opts, 0);
+    cfg_set_error_function(cfg, print_cfg_error);
     (void)cfg_parse(cfg, config_filename);
     for(unsigned int i = 0; i < cfg_size(cfg, "hosts"); i++)
     {
