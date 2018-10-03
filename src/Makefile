@@ -18,6 +18,7 @@ CFLAGS += -g3
 CFLAGS += -Wall
 CFLAGS += -c
 CFLAGS += -fmessage-length=0
+CFLAGS += -Wno-write-strings
 
 INST_PATH = /usr/local/bin/
 
