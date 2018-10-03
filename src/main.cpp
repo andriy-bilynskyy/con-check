@@ -130,8 +130,10 @@ int main()
                     }
 
                     bool on_line = (success > unsuccess);
-                        
-                    change_sate(cfg, on_line);
+                    if(!terminate)
+                    {
+                        change_sate(cfg, on_line);
+                    }
                     unsigned int conter = 0;
                     while(!terminate)
                     {
@@ -196,6 +198,8 @@ int main()
     }
 
     cfg_free(cfg);
+
+    trace_log_printf(LOG_INFO, "application stopped");
 
     return 0;
 }
