@@ -7,6 +7,7 @@ necessarily libraries:
 - liboping-dev
 - libconfuse-dev
 
+    cmake <path to rooot source folder>
     make
     sudo make install
 #### Using
@@ -14,7 +15,7 @@ necessarily libraries:
     edit connection establish script. default path: /etc/con-check/online.sh
     edit connection lost script. default path: /etc/con-check/offline.sh
 #### Service insatallation
-    sudo cp con-check_serv /etc/init.d/
+    sudo cp service/con-check_serv /etc/init.d/
     sudo update-rc.d con-check_serv defaults
 #### Usage
     sudo /etc/init.d/con-check_serv status

@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.8)
+project(con-check)
+add_subdirectory(ctrace/src/)
+add_executable(con-check src/main.cpp)
+target_compile_options(con-check PRIVATE -Wno-write-strings)
+target_link_libraries(con-check ctrace oping confuse)
+
+install(TARGETS con-check DESTINATION bin)
+install(FILES configs/con-check.conf DESTINATION /etc/con-check/ PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
+install(FILES scripts/online.sh DESTINATION /etc/con-check/ PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+install(FILES scripts/offline.sh DESTINATION /etc/con-check/ PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
