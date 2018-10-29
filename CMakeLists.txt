@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(con-check)
-add_subdirectory(ctrace/src/)
+add_subdirectory(ctrace/src/ EXCLUDE_FROM_ALL)
 add_executable(con-check src/main.cpp)
 target_compile_options(con-check PRIVATE -Wno-write-strings)
 target_link_libraries(con-check ctrace oping confuse)
